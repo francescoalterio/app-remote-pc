@@ -11,7 +11,7 @@ interface Props {
 export function PressableArrow({ iconName, onPressIn, onPressOut }: Props) {
   return (
     <Pressable onPressIn={onPressIn} onPressOut={onPressOut}>
-      <Icon name={iconName} size={50} />
+      <Icon name={iconName} size={50} color="white" />
     </Pressable>
   );
 }

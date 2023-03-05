@@ -1,21 +1,39 @@
 import { useState, useEffect } from "react";
 import { Socket } from "socket.io-client";
-import { initializeSocket } from "../services/socketServices";
+import io from "socket.io-client";
 
-type SocketEmits = "up" | "down" | "left" | "right" | "cancel";
+import { SocketEmits } from "../types";
+
+const SOCKET_URL = "http://192.168.1.5:3000";
 
 export function useSocket() {
-  const [socket, setSocket] = useState<Socket>();
+  const [socket, setSocket] = useState<Socket | "disconnected">();
   useEffect(() => {
-    if (!socket) {
-      const ioSocket = initializeSocket();
-      setSocket(ioSocket);
+    if (socket === undefined) {
+      const socket = io(SOCKET_URL, {
+        transports: ["websocket"],
+      });
+
+      socket.on("connect", () => {
+        console.log("CONECTADO");
+        setSocket(socket);
+      });
+
+      socket.on("disconnect", () => {
+        setSocket("disconnected");
+        console.log("DESCONECTADO");
+      });
+
+      socket.on("error", () => {
+        setSocket("disconnected");
+        console.log("ERROR");
+      });
     }
   });
 
   function socketEmit(emit: SocketEmits) {
-    if (socket) socket.emit(emit);
+    if (socket && socket !== "disconnected") socket.emit(emit);
   }
 
-  return { socketEmit };
+  return { socket, socketEmit };
 }
