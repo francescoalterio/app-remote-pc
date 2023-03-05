@@ -14,7 +14,6 @@ export function useSocket() {
   });
 
   function socketEmit(emit: SocketEmits) {
-    console.log("erwe");
     if (socket) socket.emit(emit);
   }
 
