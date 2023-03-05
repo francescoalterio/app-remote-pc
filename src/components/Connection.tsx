@@ -1,4 +1,6 @@
 import { View, StyleSheet, Text } from "react-native";
+import { COLORS } from "../../config/colors";
+import Icon from "react-native-vector-icons/Ionicons";
 
 interface Props {
   isConnected: boolean | undefined;
@@ -8,19 +10,14 @@ export function Connection({ isConnected }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Connection</Text>
-      <View
-        style={[
-          styles.connection,
-          { backgroundColor: isConnected ? "green" : "red" },
-        ]}
-      />
+      <Icon name={"cellular"} size={15} color={isConnected ? "green" : "red"} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#29283d",
+    backgroundColor: COLORS.buttonColor,
     paddingHorizontal: 30,
     paddingVertical: 10,
     gap: 10,
@@ -31,13 +28,12 @@ const styles = StyleSheet.create({
   connection: {
     width: 10,
     height: 10,
-    borderColor: "white",
     borderTopLeftRadius: 100,
     borderTopRightRadius: 100,
     borderBottomLeftRadius: 100,
     borderBottomRightRadius: 100,
   },
   text: {
-    color: "white",
+    color: COLORS.white,
   },
 });

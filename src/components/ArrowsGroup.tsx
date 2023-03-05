@@ -2,6 +2,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { PressableArrow } from "./PressableArrow";
 import Icon from "react-native-vector-icons/Ionicons";
 import { SocketEmits } from "../types";
+import { COLORS } from "../../config/colors";
 
 interface Props {
   socketEmit: (emit: SocketEmits) => void;
@@ -11,32 +12,32 @@ export function ArrowsGroup({ socketEmit }: Props) {
   return (
     <View style={styles.container}>
       <PressableArrow
-        iconName="arrow-up-outline"
+        iconName="caret-up"
         onPressIn={() => socketEmit("up")}
-        onPressOut={() => socketEmit("cancel")}
+        onPressOut={() => socketEmit("cancelMove")}
       />
       <View style={styles.centerButtonsContainer}>
         <PressableArrow
-          iconName="arrow-back-outline"
+          iconName="caret-back"
           onPressIn={() => socketEmit("left")}
-          onPressOut={() => socketEmit("cancel")}
+          onPressOut={() => socketEmit("cancelMove")}
         />
         <TouchableOpacity
           style={styles.clickButton}
           onPress={() => socketEmit("click")}
         >
-          <Icon name="radio-button-on-outline" size={50} color="white" />
+          <Icon name="disc" size={50} color={COLORS.white} />
         </TouchableOpacity>
         <PressableArrow
-          iconName="arrow-forward-outline"
+          iconName="caret-forward"
           onPressIn={() => socketEmit("right")}
-          onPressOut={() => socketEmit("cancel")}
+          onPressOut={() => socketEmit("cancelMove")}
         />
       </View>
       <PressableArrow
-        iconName="arrow-down-outline"
+        iconName="caret-down"
         onPressIn={() => socketEmit("down")}
-        onPressOut={() => socketEmit("cancel")}
+        onPressOut={() => socketEmit("cancelMove")}
       />
     </View>
   );
@@ -44,19 +45,21 @@ export function ArrowsGroup({ socketEmit }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#29283d",
+    backgroundColor: COLORS.buttonColor,
     alignItems: "center",
     padding: 10,
-    borderTopLeftRadius: 1000,
-    borderTopRightRadius: 1000,
-    borderBottomLeftRadius: 1000,
-    borderBottomRightRadius: 1000,
+    borderRadius: 100,
   },
   centerButtonsContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   clickButton: {
-    margin: 10,
+    padding: 10,
+    backgroundColor: COLORS.background,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
