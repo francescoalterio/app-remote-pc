@@ -31,8 +31,8 @@ export function useSocket() {
     }
   });
 
-  function socketEmit(emit: SocketEmits) {
-    if (socket && socket !== "disconnected") socket.emit(emit);
+  function socketEmit(emit: SocketEmits, msg?: string) {
+    if (socket && socket !== "disconnected") socket.emit(emit, msg);
   }
 
   return { socket, socketEmit };

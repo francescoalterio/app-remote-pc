@@ -7,4 +7,5 @@ export type SocketEmits =
   | "click"
   | "scrollUp"
   | "scrollDown"
-  | "cancelScroll";
+  | "cancelScroll"
+  | "write";

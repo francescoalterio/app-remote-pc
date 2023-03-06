@@ -19,7 +19,7 @@ export default function App() {
       <View>
         <Scroll socketEmit={socketEmit} />
       </View>
-      <Input />
+      <Input socketEmit={socketEmit} />
       <StatusBar style="light" />
     </View>
   );
