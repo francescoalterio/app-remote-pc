@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native";
 import { COLORS } from "../../config/colors";
 import { SocketEmits } from "../types";
 import { PressableArrow } from "./PressableArrow";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
   socketEmit: (emit: SocketEmits) => void;
@@ -9,7 +10,15 @@ interface Props {
 
 export function Scroll({ socketEmit }: Props) {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[
+        COLORS.bigButtonGradientDark,
+
+        COLORS.bigButtonGradientLight,
+        COLORS.bigButtonGradientDark,
+      ]}
+      style={styles.container}
+    >
       <PressableArrow
         iconName="caret-up"
         onPressIn={() => socketEmit("scrollUp")}
@@ -20,7 +29,7 @@ export function Scroll({ socketEmit }: Props) {
         onPressIn={() => socketEmit("scrollDown")}
         onPressOut={() => socketEmit("cancelScroll")}
       />
-    </View>
+    </LinearGradient>
   );
 }
 

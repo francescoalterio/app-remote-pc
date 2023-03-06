@@ -3,6 +3,7 @@ import { PressableArrow } from "./PressableArrow";
 import Icon from "react-native-vector-icons/Ionicons";
 import { SocketEmits } from "../types";
 import { COLORS } from "../../config/colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
   socketEmit: (emit: SocketEmits) => void;
@@ -10,7 +11,11 @@ interface Props {
 
 export function ArrowsGroup({ socketEmit }: Props) {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[COLORS.bigButtonGradientDark, COLORS.bigButtonGradientLight]}
+      start={{ x: 0, y: 0 }}
+      style={styles.container}
+    >
       <PressableArrow
         iconName="caret-up"
         onPressIn={() => socketEmit("up")}
@@ -39,7 +44,7 @@ export function ArrowsGroup({ socketEmit }: Props) {
         onPressIn={() => socketEmit("down")}
         onPressOut={() => socketEmit("cancelMove")}
       />
-    </View>
+    </LinearGradient>
   );
 }
 

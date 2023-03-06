@@ -8,27 +8,29 @@ import Constants from "expo-constants";
 import { COLORS } from "./config/colors";
 import { Scroll } from "./src/components/Sroll";
 import { Input } from "./src/components/Input";
+import { BackgroundGradient } from "./src/components/BackgroudGradient";
 
 export default function App() {
   const { socket, socketEmit } = useSocket();
 
   return (
-    <View style={styles.container}>
-      <Connection isConnected={socket && socket !== "disconnected"} />
-      <ArrowsGroup socketEmit={socketEmit} />
-      <View>
-        <Scroll socketEmit={socketEmit} />
+    <BackgroundGradient>
+      <View style={styles.container}>
+        <Connection isConnected={socket && socket !== "disconnected"} />
+        <ArrowsGroup socketEmit={socketEmit} />
+        <View>
+          <Scroll socketEmit={socketEmit} />
+        </View>
+        <Input socketEmit={socketEmit} />
+        <StatusBar style="light" />
       </View>
-      <Input socketEmit={socketEmit} />
-      <StatusBar style="light" />
-    </View>
+    </BackgroundGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
     alignItems: "center",
     paddingTop: Constants.statusBarHeight + 10,
     gap: 20,
